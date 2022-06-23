@@ -52,7 +52,7 @@ if args.width == "beamer":
         "text.usetex": True,
         "font.family": "sans-serif",
         # Use 24pt font in plots, to match 24pt font in powerpoint
-        "axes.labelsize": 124,
+        "axes.labelsize": 24,
         "font.size": 24,
         # Make the legend/label fonts a little smaller
         "legend.fontsize": 14,
@@ -70,11 +70,11 @@ fig, ax = plt.subplots(1, 1, figsize=set_size(width=args.width))
 # load data into dataframe
 df = pd.read_csv(args.input)
 # plot data
-ax.plot(df[args.names[0]] * args.corr, df[args.names[1]], color=f"b", alpha=0.4)
+ax.plot(df[args.names[0]] * args.corr, 1-df[args.names[1]], color=f"b", alpha=0.4)
 # plot running average
 ax.plot(
     df[args.names[0]] * args.corr,
-    df[args.names[1]].rolling(args.size).mean(),
+    1 - df[args.names[1]].rolling(args.size).mean(),
     color=f"b",
     linewidth=2.0,
 )
